@@ -13,9 +13,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Menu;
 import javafx.scene.Node;
@@ -34,6 +36,9 @@ public class SelectMenuController {
     @FXML
     private TableView<Menu> table;
 
+    @FXML
+    private TableColumn<Menu, Integer> quantityCol;
+
     private LinkedList<Menu> menuList = new LinkedList<Menu>();
 
     private LinkedList<Menu> listOfOrder = new LinkedList<Menu>();
@@ -45,6 +50,7 @@ public class SelectMenuController {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         menuNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        quantityCol.setCellValueFactory(new PropertyValueFactory<>("timesOrdered"));
 
         Connection connection = GetConnection.getConnection();
         String sql = "SELECT * FROM menus";
@@ -77,44 +83,63 @@ public class SelectMenuController {
     @FXML
     void addBtn(ActionEvent event) {
         Menu selectedMenu = table.getSelectionModel().getSelectedItem();
-        boolean menuExist = false;
+        boolean isExist = false;
+        for (Menu menu : listOfOrder) {
+            if (menu.getId() == selectedMenu.getId()) {
+                isExist = true;
+                break;
+            }
+        }
+
+        if (!isExist) {
+            listOfOrder.add(selectedMenu);
+            selectedMenu.setTimesOrdered(selectedMenu.getTimesOrdered() + 1);
+        } else {
+            selectedMenu.setTimesOrdered(selectedMenu.getTimesOrdered() + 1);
+
+        }
+
+        System.out.println("Selected Menu 3 Times Ordered : " + selectedMenu.getTimesOrdered());
+        table.getItems().clear();
+
+        table.getItems().addAll(menuList);
+
+    }
+
+    @FXML
+    void deleteteBtn(ActionEvent event) {
+        Menu selectedMenu = table.getSelectionModel().getSelectedItem();
+        boolean isExist = false;
         if (selectedMenu != null) {
-            // check if the selectedMenu is already in the listOfOrder
             for (Menu menu : listOfOrder) {
                 if (menu.getId() == selectedMenu.getId()) {
-                    // set a +1 timesOrdered
-                    menu.setTimesOrdered(menu.getTimesOrdered() + 1);
-                    menuExist = true;
+                    isExist = true;
+                    break;
                 }
             }
 
-            if (menuExist == false) {
-                // add the selectedMenu to the listOfOrder
-                listOfOrder.add(selectedMenu);
+            if (selectedMenu.getTimesOrdered() > 0) {
+                selectedMenu.setTimesOrdered(selectedMenu.getTimesOrdered() - 1);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No menu selected");
+                alert.setContentText("Please select a menu to delete from your order");
+                alert.showAndWait();
             }
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("You have added " + selectedMenu.getName() + " to your order");
-            alert.showAndWait();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a menu");
-            alert.show();
+            alert.setTitle("Error");
+            alert.setHeaderText("Menu Is Empty");
+            alert.setContentText("Please select menu is bigger than 0");
+            alert.showAndWait();
         }
 
-        table.getSelectionModel().select(null);
+        table.getItems().clear();
 
-        System.out.println(listOfOrder.get(0).getTimesOrdered());
-        System.out.println(listOfOrder);
-    }
+        table.getItems().addAll(menuList);
 
-    void setTableNum(String tableNum) {
-        this.tableNum = Integer.parseInt(tableNum.trim());
     }
 
     @FXML
@@ -126,26 +151,82 @@ public class SelectMenuController {
             alert.setContentText("Please select a menu");
             alert.show();
         } else {
-            try {
-                // ambil fxml yang dituju
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/OrderConfirmationPage.fxml"));
-                // load fxml
-                Parent root = loader.load();
-                // pangil controller
-                OrderConfirmationController controller = loader.getController();
-                // set tableNum
-                controller.setListOfOrderAndTableNumber(listOfOrder, this.tableNum);
-                // ambil stage/frame yang sekarang
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                // buat scene baru dan tempelin root yang ingin dituju
-                Scene scene = new Scene(root);
-                // stage yang sekarang ambil dan tempelin scene yang baru/ingin dituju
-                stage.setScene(scene);
-                // show stage yang baru
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to order?");
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                try {
+                    // ambil fxml yang dituju
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/OrderConfirmationPage.fxml"));
+                    // load fxml
+                    Parent root = loader.load();
+                    // pangil controller
+                    OrderConfirmationController controller = loader.getController();
+                    // set tableNum
+                    controller.setListOfOrderAndTableNumber(listOfOrder, this.tableNum);
+                    // ambil stage/frame yang sekarang
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    // buat scene baru dan tempelin root yang ingin dituju
+                    Scene scene = new Scene(root);
+                    // stage yang sekarang ambil dan tempelin scene yang baru/ingin dituju
+                    stage.setScene(scene);
+                    // show stage yang baru
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                for (Menu menu : menuList) {
+                    menu.setTimesOrdered(0);
+                }
+
+                listOfOrder.clear();
+
+                table.getItems().clear();
+
+                table.getItems().addAll(menuList);
+
             }
+
+        }
+    }
+
+    void setTableNum(String tableNum) {
+        this.tableNum = Integer.parseInt(tableNum.trim());
+    }
+
+    @FXML
+    void backBtn(MouseEvent event) {
+        Connection connection = GetConnection.getConnection();
+        String sql = "UPDATE tables SET avaliable = 1 WHERE tables_num = " + this.tableNum;
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            connection.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            // ambil fxml yang dituju
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/TableNumberConfirmationPage.fxml"));
+            // load fxml
+            Parent root = loader.load();
+            // ambil stage/frame yang sekarang
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // buat scene baru dan tempelin root yang ingin dituju
+            Scene scene = new Scene(root);
+            // stage yang sekarang ambil dan tempelin scene yang baru/ingin dituju
+            stage.setScene(scene);
+            // show stage yang baru
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

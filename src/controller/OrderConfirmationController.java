@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import database.CurrentLoginUser;
 import database.GetConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +50,12 @@ public class OrderConfirmationController {
     @FXML
     private Button doneBtn;
 
+    @FXML
+    private Text informationText;
+
+    @FXML
+    private Text orderIdText;
+
     private LinkedList<Menu> listOfOrder;
 
     private int tableNumber;
@@ -66,6 +73,8 @@ public class OrderConfirmationController {
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("timesOrdered"));
 
         this.doneBtn.setVisible(false);
+
+        informationText.setText("Unpaid");
 
         new Timer().schedule(
                 new TimerTask() {
@@ -90,8 +99,13 @@ public class OrderConfirmationController {
                                     doneBtn.setVisible(true);
                                     cancelBtn.setVisible(false);
                                     newTransaction();
+                                    informationText.setText("Paid");
                                     cancel();
                                     break;
+                                }
+
+                                if (resultSet.getInt("paid") == 0) {
+                                    informationText.setText("Unpaid");
                                 }
 
                             }
@@ -200,24 +214,29 @@ public class OrderConfirmationController {
         totalText.setText("Total: $" + total);
 
         newOrder();
+
     }
 
     void newOrder() {
 
         try {
             Connection connection1 = GetConnection.getConnection();
-            String sql1 = "INSERT INTO orders (order_date, paid, users_id, tables_num, canceled) VALUES (?, 0, null, ?, 0)";
+            String sql1 = "INSERT INTO orders (order_date, paid, users_id, tables_num, canceled, total_price, customers_id) VALUES (?, 0, null, ?, 0, ?, ?)";
 
             PreparedStatement preparedStatement1 = connection1.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
             preparedStatement1.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
             preparedStatement1.setInt(2, this.tableNumber);
-
+            preparedStatement1.setDouble(3, this.total);
+            preparedStatement1.setInt(4, CurrentLoginUser.currentUser.getId());
+            System.out.println("current user id " + CurrentLoginUser.currentUser.getId());
             preparedStatement1.executeUpdate();
 
             ResultSet res = preparedStatement1.getGeneratedKeys();
 
             if (res.next()) {
                 this.orderId = res.getInt(1);
+                this.orderIdText.setText("Order ID: " + this.orderId);
+
             }
 
             connection1.close();

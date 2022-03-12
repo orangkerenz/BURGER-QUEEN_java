@@ -8,12 +8,25 @@ public class Menu {
     private SimpleIntegerProperty id;
     private SimpleStringProperty name;
     private SimpleDoubleProperty price;
-    private int timesOrdered = 1;
+    private SimpleIntegerProperty timesOrdered;
 
     public Menu(Integer id, String name, Double price) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleDoubleProperty(price);
+        this.timesOrdered = new SimpleIntegerProperty(0);
+    }
+
+    public Menu(String name, Double price, Integer timesOrdered) {
+        this.name = new SimpleStringProperty(name);
+        this.price = new SimpleDoubleProperty(price);
+        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
+    }
+
+    public Menu(Integer id, String name, Integer timesOrdered) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
     }
 
     public int getId() {
@@ -40,24 +53,11 @@ public class Menu {
         this.price.set(price);
     }
 
-    public SimpleIntegerProperty idProperty() {
-        return id;
-    }
-
-    public SimpleStringProperty nameProperty() {
-        return name;
-    }
-
-    public SimpleDoubleProperty priceProperty() {
-        return price;
-    }
-
     public int getTimesOrdered() {
-        return timesOrdered;
+        return timesOrdered.get();
     }
 
     public void setTimesOrdered(int timesOrdered) {
-        this.timesOrdered = timesOrdered;
+        this.timesOrdered.set(timesOrdered);
     }
-
 }

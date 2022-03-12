@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuChefController">
    <children>
       <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +24,7 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Button layoutX="48.0" layoutY="230.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Order Request" textFill="#ffb800">
+      <Button layoutX="48.0" layoutY="230.0" mnemonicParsing="false" onAction="#orderRequestOnAction" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Order Request" textFill="#ffb800">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
