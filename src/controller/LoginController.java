@@ -120,7 +120,7 @@ public class LoginController {
                     case "customer":
 
                         Connection connection2 = GetConnection.getConnection();
-                        String sql2 = "SELECT * FROM orders WHERE customers_id = ? AND PAID = 1 AND (served = 0 OR served = 1 OR served = 2) AND completed = 0";
+                        String sql2 = "SELECT * FROM orders WHERE customers_id = ? AND paid = '1' AND canceled = 0 AND (served = 0 OR served = 1 OR served = 2) AND completed = 0 ";
 
                         try {
                             PreparedStatement preparedStatement2 = connection2.prepareStatement(sql2);

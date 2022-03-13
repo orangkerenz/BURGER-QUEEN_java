@@ -16,6 +16,7 @@ public class MenuWaiterController {
 
     @FXML
     void logoutOnAction(ActionEvent event) {
+        CurrentLoginUser.currentUser = null;
         // go back to the main menu
         try {
             // ambil fxml yang dituju

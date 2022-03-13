@@ -29,6 +29,11 @@ public class Menu {
         this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
     }
 
+    public Menu(String name, Integer timesOrdered) {
+        this.name = new SimpleStringProperty(name);
+        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
+    }
+
     public int getId() {
         return id.get();
     }

@@ -1,2 +1,4 @@
 1.Back Button
 2.lanjutin fitur
+3.rapihin nama yang typo
+4.rapihin code
