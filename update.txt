@@ -2,3 +2,4 @@
 2.lanjutin fitur
 3.rapihin nama yang typo
 4.rapihin code
+5.jika keluar di orderConfirmation dalam 10 menit maka update tablenya jadi 1 dan cancel transaksinya

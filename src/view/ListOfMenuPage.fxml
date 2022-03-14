@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" onMouseClicked="#backBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../BackButton.png" />
          </image>
@@ -31,12 +31,13 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TableView layoutX="48.0" layoutY="371.0" prefHeight="254.0" prefWidth="332.0">
+      <TableView layoutX="48.0" layoutY="371.0" prefHeight="283.0" prefWidth="332.0">
         <columns>
-          <TableColumn prefWidth="331.0" text="Menu Name" />
+          <TableColumn prefWidth="78.0" text="id" />
+            <TableColumn prefWidth="253.0" text="Menu Name" />
         </columns>
       </TableView>
-      <Button layoutX="48.0" layoutY="296.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="173.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Add">
+      <Button layoutX="48.0" layoutY="296.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="48.0" prefWidth="173.0" style="-fx-background-color: white; -fx-background-radius: 4;" text="Add">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

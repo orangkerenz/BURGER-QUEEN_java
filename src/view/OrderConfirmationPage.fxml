@@ -51,5 +51,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
+      <Button fx:id="cancelBtn1" layoutX="241.0" layoutY="65.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: red;" text="Logout" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

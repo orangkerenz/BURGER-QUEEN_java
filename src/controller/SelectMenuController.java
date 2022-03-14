@@ -6,8 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import database.GetConnection;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Menu;
 import javafx.scene.Node;
 
@@ -169,12 +174,53 @@ public class SelectMenuController {
                     controller.setListOfOrderAndTableNumber(listOfOrder, this.tableNum);
                     // ambil stage/frame yang sekarang
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                    stage.setOnCloseRequest((EventHandler<WindowEvent>) new EventHandler<WindowEvent>() {
+                        public void handle(WindowEvent we) {
+                            new Timer().schedule(
+                                    new TimerTask() {
+
+                                        @Override
+                                        public void run() {
+                                            // check apakah dia sudah di paid atau belum(Belum selesai)
+
+                                            // jika sudah maka
+                                            Connection connection = GetConnection.getConnection();
+                                            String sql = "UPDATE tables SET avaliable = 1 WHERE tables_num = "
+                                                    + tableNum;
+                                            Statement statement = null;
+
+                                            try {
+                                                statement = connection.createStatement();
+                                                statement.executeUpdate(sql);
+                                                connection.close();
+                                                statement.close();
+                                            } catch (SQLException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            cancel();
+
+                                            System.out.println("pagi");
+                                        }
+
+                                    }, 60000, 60000);
+
+                        }
+                    });
+
                     // buat scene baru dan tempelin root yang ingin dituju
                     Scene scene = new Scene(root);
                     // stage yang sekarang ambil dan tempelin scene yang baru/ingin dituju
                     stage.setScene(scene);
                     // show stage yang baru
                     stage.show();
+
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Information Dialog");
+                    alert2.setHeaderText(null);
+                    alert2.setContentText(
+                            "We Will Give 1 Minute To Finish Your Payment, Or Else Your Seat Will Be Available For Other Customer");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
