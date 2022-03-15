@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListOfMenuController">
    <children>
       <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" onMouseClicked="#backBtn" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,18 +26,23 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Button layoutX="48.0" layoutY="693.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800; -fx-background-radius: 8;" text="View" textFill="WHITE">
+      <Button layoutX="48.0" layoutY="693.0" mnemonicParsing="false" onAction="#viewBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800; -fx-background-radius: 8;" text="View Recipes" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TableView layoutX="48.0" layoutY="371.0" prefHeight="283.0" prefWidth="332.0">
+      <TableView fx:id="table" layoutX="48.0" layoutY="371.0" prefHeight="283.0" prefWidth="332.0">
         <columns>
-          <TableColumn prefWidth="78.0" text="id" />
-            <TableColumn prefWidth="253.0" text="Menu Name" />
+          <TableColumn fx:id="idCol" prefWidth="78.0" text="id" />
+            <TableColumn fx:id="menuCol" prefWidth="253.0" text="Menu Name" />
         </columns>
       </TableView>
       <Button layoutX="48.0" layoutY="296.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="48.0" prefWidth="173.0" style="-fx-background-color: white; -fx-background-radius: 4;" text="Add">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="48.0" layoutY="781.0" mnemonicParsing="false" onAction="#editBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Edit" textFill="#ffb800">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

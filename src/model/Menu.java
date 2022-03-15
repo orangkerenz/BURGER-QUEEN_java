@@ -17,6 +17,11 @@ public class Menu {
         this.timesOrdered = new SimpleIntegerProperty(0);
     }
 
+    public Menu(Integer id, String name) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+    }
+
     public Menu(String name, Double price, Integer timesOrdered) {
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleDoubleProperty(price);

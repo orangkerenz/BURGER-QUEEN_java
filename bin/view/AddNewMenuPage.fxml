@@ -11,52 +11,57 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1281.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="895.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddNewMenuController">
    <children>
-      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" onMouseClicked="#backBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../BackButton.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="48.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New" wrappingWidth="290.640625">
+      <Text fill="WHITE" layoutX="48.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New" wrappingWidth="290.640625">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Text fill="#ffb800" layoutX="48.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Name" wrappingWidth="290.640625">
+      <Text fill="#ffb800" layoutX="48.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Name" wrappingWidth="290.640625">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="48.0" layoutY="1056.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Login" textFill="WHITE">
+      <Button layoutX="48.0" layoutY="747.0" mnemonicParsing="false" onAction="#submitBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Submit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TextField layoutX="48.0" layoutY="341.0" prefHeight="68.0" prefWidth="332.0" />
-      <Text fill="#ffb800" layoutX="48.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Price" wrappingWidth="290.640625">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <TextField layoutX="48.0" layoutY="478.0" prefHeight="68.0" prefWidth="332.0" />
-      <Text fill="WHITE" layoutX="48.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="290.640625">
+      <Text fill="WHITE" layoutX="48.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="290.640625">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Text fill="#ffb800" layoutX="48.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredients" wrappingWidth="191.640625">
+      <Text fill="#ffb800" layoutX="48.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredients" wrappingWidth="191.640625">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField layoutX="243.0" layoutY="639.0" prefHeight="40.0" prefWidth="137.0" />
-      <ComboBox layoutX="48.0" layoutY="639.0" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: white;" />
-      <TableView layoutX="48.0" layoutY="713.0" prefHeight="286.0" prefWidth="332.0">
+      <TextField fx:id="quantityInGramsTf" layoutX="243.0" layoutY="516.0" prefHeight="40.0" prefWidth="137.0" />
+      <ComboBox fx:id="listOfIngredientsCb" layoutX="48.0" layoutY="516.0" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: white;" />
+      <TableView fx:id="table" layoutX="48.0" layoutY="582.0" prefHeight="139.0" prefWidth="332.0">
         <columns>
-          <TableColumn prefWidth="161.0" text="Ingredient Name" />
-          <TableColumn prefWidth="170.0" text="Gram" />
+          <TableColumn fx:id="ingredientsNameCol" prefWidth="161.0" text="Ingredient Name" />
+          <TableColumn fx:id="gramsColl" prefWidth="170.0" text="Gram" />
         </columns>
       </TableView>
+      <TextField fx:id="menuPriceTf" layoutX="48.0" layoutY="409.0" prefHeight="40.0" prefWidth="332.0" />
+      <Text fill="#ffb800" layoutX="48.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Price" wrappingWidth="191.640625">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="menuNameTf" layoutX="48.0" layoutY="313.0" prefHeight="40.0" prefWidth="332.0" />
+      <Button layoutX="258.0" layoutY="467.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: ffb800;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
