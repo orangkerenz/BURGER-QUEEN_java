@@ -85,9 +85,19 @@ public class AddNewMenuController {
 
             if (grams > 0) {
                 Ingredients ingredients = new Ingredients(ingredientsName, ingredientsId, grams);
-                ingredientsList.add(ingredients);
-                table.getItems().clear();
-                table.getItems().addAll(ingredientsList);
+
+                if (ingredientsList.contains(ingredients)) {
+                    ingredientsList.add(ingredients);
+                    table.getItems().clear();
+                    table.getItems().addAll(ingredientsList);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("You can't add the same ingredient twice");
+                    alert.showAndWait();
+                }
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");

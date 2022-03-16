@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="895.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditMenuController">
+   <children>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" onMouseClicked="#backBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../BackButton.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="48.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" wrappingWidth="290.640625">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Text>
+      <Text fill="#ffb800" layoutX="48.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Name" wrappingWidth="290.640625">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="48.0" layoutY="747.0" mnemonicParsing="false" onAction="#editBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Edit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="48.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="290.640625">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Text>
+      <Text fill="#ffb800" layoutX="48.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredients" wrappingWidth="191.640625">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="quantityInGramsTf" layoutX="243.0" layoutY="516.0" prefHeight="40.0" prefWidth="137.0" />
+      <ComboBox fx:id="listOfIngredientsCb" layoutX="48.0" layoutY="516.0" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: white;" />
+      <TableView fx:id="table" layoutX="48.0" layoutY="582.0" prefHeight="139.0" prefWidth="332.0">
+        <columns>
+          <TableColumn fx:id="ingredientsNameCol" prefWidth="161.0" text="Ingredient Name" />
+          <TableColumn fx:id="gramsColl" prefWidth="170.0" text="Gram" />
+        </columns>
+      </TableView>
+      <TextField fx:id="menuPriceTf" layoutX="222.0" layoutY="408.0" prefHeight="40.0" prefWidth="160.0" />
+      <Text fill="#ffb800" layoutX="222.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Price" wrappingWidth="137.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="menuNameTf" layoutX="48.0" layoutY="313.0" prefHeight="40.0" prefWidth="332.0" />
+      <Button layoutX="198.0" layoutY="466.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: ffb800;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="297.0" layoutY="466.0" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Text fill="#ffb800" layoutX="48.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Aval" wrappingWidth="124.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="menuAvalTf" layoutX="48.0" layoutY="408.0" prefHeight="40.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>
