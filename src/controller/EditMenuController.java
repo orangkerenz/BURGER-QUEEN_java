@@ -199,30 +199,27 @@ public class EditMenuController {
                     e.printStackTrace();
                 }
             }
-        }
 
-        try {
+            try {
 
-            // check apakah nama,menu aval dan menu price itu sama dengan yang lama
-            String menuName = menuNameTf.getText();
-            String menuAval = menuAvalTf.getText();
-            Double menuPrice = Double.parseDouble(menuPriceTf.getText());
+                // check apakah nama,menu aval dan menu price itu sama dengan yang lama
+                String menuName = menuNameTf.getText();
+                String menuAval = menuAvalTf.getText();
+                Double menuPrice = Double.parseDouble(menuPriceTf.getText());
 
-            if (menuName.isBlank() && menuAval.isBlank() && menuPrice < 0
-                    && (menuAval.equals("1") || menuAval.equals("0"))) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("Please Fill Valid Value!");
-                alert.showAndWait();
-            } else {
-                if (menu != null) {
-                    if (menuName.equals(menu.getName()) && menuAval.equals(menu.getAvaliable())
-                            && menuPrice == menu.getPrice()) {
+                if (menuName.isBlank() || menuAval.isBlank() || menuPrice < 0
+                        || (menuAval.equals("1") && menuAval.equals("0"))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Please Fill Valid Value!");
+                    alert.showAndWait();
 
-                    } else {
+                } else {
+                    if (menu != null) {
                         // update menu yang lama
-                        sql = "UPDATE menus SET name = '" + menuName + "', avaliable = " + menuAval + ", price = "
+                        sql = "UPDATE menus SET name = '" + menuName + "', avaliable = " + menuAval +
+                                ", price = "
                                 + menuPrice + " WHERE id = " + menu.getId();
                         try {
                             Statement statement = conn.createStatement();
@@ -231,21 +228,22 @@ public class EditMenuController {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                    }
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information");
-                    alert.setHeaderText("Information");
-                    alert.setContentText("Menu Successfully Edited!");
-                    alert.showAndWait();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information");
+                        alert.setHeaderText("Information");
+                        alert.setContentText("Menu Successfully Edited!");
+                        alert.showAndWait();
+                    }
                 }
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please Fill Valid Value!");
+                alert.showAndWait();
             }
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Please Fill Valid Value!");
-            alert.showAndWait();
+
         }
 
     }
