@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuManagerController">
    <children>
       <Button layoutX="48.0" layoutY="738.0" mnemonicParsing="false" onAction="#logoutOnAction" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: red; -fx-background-radius: 8;" text="Logout" textFill="WHITE">
          <font>
@@ -17,17 +17,27 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Button layoutX="48.0" layoutY="230.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Inventory Restock" textFill="#ffb800">
+      <Button layoutX="48.0" layoutY="230.0" mnemonicParsing="false" onAction="#inventoryRestockBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Inventory Restock" textFill="#ffb800">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="48.0" layoutY="311.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="New Ingredients" textFill="#ffb800">
+      <Button layoutX="48.0" layoutY="311.0" mnemonicParsing="false" onAction="#newIngredientsBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="New Ingredients" textFill="#ffb800">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="48.0" layoutY="394.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Bookkeeping" textFill="#ffb800">
+      <Button layoutX="48.0" layoutY="394.0" mnemonicParsing="false" onAction="#bookkeepingBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Bookkeeping" textFill="#ffb800">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="48.0" layoutY="480.0" mnemonicParsing="false" onAction="#bookkeepingBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Inventory" textFill="#ffb800">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="48.0" layoutY="567.0" mnemonicParsing="false" onAction="#addTableBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Add Table" textFill="#ffb800">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

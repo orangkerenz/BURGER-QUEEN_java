@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InventoryRestockController">
    <children>
-      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="48.0" layoutY="59.0" onMouseClicked="#backBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../BackButton.png" />
          </image>
@@ -26,7 +26,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="48.0" layoutY="732.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Add" textFill="WHITE">
+      <Button layoutX="48.0" layoutY="732.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -36,13 +36,13 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField layoutX="48.0" layoutY="464.0" prefHeight="68.0" prefWidth="332.0" />
+      <TextField fx:id="restockQtyTf" layoutX="48.0" layoutY="464.0" prefHeight="68.0" prefWidth="332.0" />
       <Text fill="#ffb800" layoutX="48.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="290.640625">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField layoutX="48.0" layoutY="596.0" prefHeight="68.0" prefWidth="332.0" />
-      <ComboBox layoutX="48.0" layoutY="330.0" prefHeight="68.0" prefWidth="332.0" style="-fx-background-color: white;" />
+      <TextField fx:id="priceTf" layoutX="48.0" layoutY="596.0" prefHeight="68.0" prefWidth="332.0" />
+      <ComboBox fx:id="ingredientsNameCb" layoutX="48.0" layoutY="330.0" prefHeight="68.0" prefWidth="332.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>
