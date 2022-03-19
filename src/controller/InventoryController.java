@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import database.CurrentLoginUser;
-import database.GetConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +18,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Ingredients;
+import tools.AlertTools;
+import tools.CurrentLoginUser;
+import tools.DatabaseTools;
+import tools.JavafxTools;
 
 public class InventoryController {
 
@@ -37,32 +39,13 @@ public class InventoryController {
         ingredientCol.setCellValueFactory(new PropertyValueFactory<>("ingredientsName"));
         gramCol.setCellValueFactory(new PropertyValueFactory<>("grams"));
 
-        try {
-            Connection connection = GetConnection.getConnection();
-            String sql = "SELECT * FROM ingredients";
-
-            Statement statement = connection.createStatement();
-
-            ResultSet rs = statement.executeQuery(sql);
-
-            while (rs.next()) {
-                Ingredients ingredients = new Ingredients(rs.getString("name"), rs.getInt("id"),
-                        rs.getDouble("quantity_in_grams"));
-
-                table.getItems().add(ingredients);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @FXML
     void backBtn(MouseEvent event) {
 
         try {
-            if (CurrentLoginUser.currentUser.getRole().equals("chef")) {
+            if (CurrentLoginUser.getRole().equals("chef")) {
                 try {
                     // ambil fxml yang dituju
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MenuChefPage.fxml"));
@@ -81,7 +64,7 @@ public class InventoryController {
                 }
             }
 
-            if (CurrentLoginUser.currentUser.getRole().equals("manager")) {
+            if (CurrentLoginUser.getRole().equals("manager")) {
                 try {
                     // ambil fxml yang dituju
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MenuManagerPage.fxml"));
@@ -101,29 +84,12 @@ public class InventoryController {
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
-            CurrentLoginUser.currentUser = null;
-            try {
-                // ambil fxml yang dituju
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LoginPage.fxml"));
-                // load fxml
-                Parent root = loader.load();
-                // ambil stage/frame yang sekarang
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                // buat scene baru dan tempelin root yang ingin dituju
-                Scene scene = new Scene(root);
-                // stage yang sekarang ambil dan tempelin scene yang baru/ingin dituju
-                stage.setScene(scene);
-                // show stage yang baru
-                stage.show();
-            } catch (IOException ee) {
-                ee.printStackTrace();
-            }
 
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("You are not logged in");
-            alert.setContentText("Please login first");
-            alert.showAndWait();
+            JavafxTools.changeSceneMouseEvent(event, "../view/LoginPage.fxml");
+
+            AlertTools.setAlert("Error",
+                    "You are not logged in", "Please login first!", Alert.AlertType.INFORMATION);
+
         }
 
     }

@@ -17,23 +17,6 @@ public class Ingredients {
         this.ingredientsId = new SimpleIntegerProperty(ingredientsId);
     }
 
-    public Ingredients(int menuid, String ingredientsName, Double grams) {
-        this.menuid = new SimpleIntegerProperty(menuid);
-        this.ingredientsName = new SimpleStringProperty(ingredientsName);
-        this.grams = new SimpleDoubleProperty(grams);
-    }
-
-    public Ingredients(String ingredientsName, int ingredientsId, Double grams) {
-        this.ingredientsName = new SimpleStringProperty(ingredientsName);
-        this.grams = new SimpleDoubleProperty(grams);
-        this.ingredientsId = new SimpleIntegerProperty(ingredientsId);
-    }
-
-    public Ingredients(String ingredientsName, Double grams) {
-        this.ingredientsName = new SimpleStringProperty(ingredientsName);
-        this.grams = new SimpleDoubleProperty(grams);
-    }
-
     public int getMenuid() {
         return menuid.get();
     }

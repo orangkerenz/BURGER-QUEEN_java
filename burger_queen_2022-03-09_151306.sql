@@ -1,199 +1,102 @@
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
---
--- Host: 127.0.0.1    Database: burger_queen
--- ------------------------------------------------------
--- Server version	8.0.27
+CREATE TABLE users(
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    role ENUM('waiter', 'chef', 'manager', 'customer') NOT NULL,
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+    PRIMARY KEY(id)
+);
 
---
--- Table structure for table `ingredients`
---
+CREATE TABLE tables(
+    tables_num INT NOT NULL,
+    tables_capacity INT NOT NULL,
+    avaliable TINYINT NOT NULL,
+    PRIMARY KEY(tables_num)
+);
 
-DROP TABLE IF EXISTS `ingredients`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ingredients` (
-  `id` int NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE menus(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50),
+    price DECIMAL(19,4),
+    avaliable TINYINT NOT NULL DEFAULT 1,
 
---
--- Table structure for table `inventories`
---
+    PRIMARY KEY(id)
+);
 
-DROP TABLE IF EXISTS `inventories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `inventories` (
-  `id` int NOT NULL,
-  `ingredients_id` int NOT NULL,
-  `quantity_in_grams` decimal(10,4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ingredients_id` (`ingredients_id`),
-  CONSTRAINT `inventories_ibfk_1` FOREIGN KEY (`ingredients_id`) REFERENCES `ingredients` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE ingredients(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50),
+    quantity_in_grams DECIMAL(10,4),
 
---
--- Table structure for table `menus`
---
+    PRIMARY KEY(id)
+);
 
-DROP TABLE IF EXISTS `menus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `menus` (
-  `id` int NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `price` decimal(19,4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE orders(
+    id INT NOT NULL AUTO_INCREMENT,
+    order_date TIMESTAMP NOT NULL,
+    paid TINYINT NOT NULL,
+    users_id INT,
+    customers_id INT NOT NULL,
+    tables_num INT NOT NULL,
+    canceled TINYINT NOT NULL,
+    served TINYINT NOT NULL DEFAULT 0,
+    completed TINYINT NOT NULL DEFAULT 0,
+    total_price DECIMAL(19,4),
 
---
--- Table structure for table `menus_has_order`
---
+    PRIMARY KEY(id),
+    FOREIGN KEY (tables_num) REFERENCES tables(tables_num),
+    FOREIGN KEY (users_id) REFERENCES users(id)
+);
 
-DROP TABLE IF EXISTS `menus_has_order`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `menus_has_order` (
-  `menus_id` int NOT NULL,
-  `orders_id` int NOT NULL,
-  PRIMARY KEY (`menus_id`,`orders_id`),
-  KEY `orders_id` (`orders_id`),
-  CONSTRAINT `menus_has_order_ibfk_1` FOREIGN KEY (`menus_id`) REFERENCES `menus` (`id`),
-  CONSTRAINT `menus_has_order_ibfk_2` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE recipes(
+    menus_id INT NOT NULL,
+    ingredients_id INT NOT NULL,
+    quantity_in_grams DECIMAL(10,4),
 
---
--- Table structure for table `orders`
---
+    PRIMARY KEY(menus_id, ingredients_id),
+    FOREIGN KEY (menus_id) REFERENCES menus(id),
+    FOREIGN KEY (ingredients_id) REFERENCES ingredients(id)
+);
 
-DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orders` (
-  `id` int NOT NULL,
-  `order_date` datetime NOT NULL,
-  `paid` tinyint DEFAULT NULL,
-  `users_id` int NOT NULL,
-  `tables_id` int NOT NULL,
-  `canceled` tinyint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `tables_id` (`tables_id`),
-  KEY `users_id` (`users_id`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`tables_id`) REFERENCES `tables` (`id`),
-  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE menus_has_order(
+    menus_id INT NOT NULL,
+    orders_id INT NOT NULL,
+    quantity INT NOT NULL,
 
---
--- Table structure for table `recipes`
---
+    PRIMARY KEY(menus_id, orders_id),
+    FOREIGN KEY (menus_id) REFERENCES menus(id),
+    FOREIGN KEY (orders_id) REFERENCES orders(id)
+);
 
-DROP TABLE IF EXISTS `recipes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recipes` (
-  `menus_id` int NOT NULL,
-  `ingredients_id` int NOT NULL,
-  `quantity_in_grams` decimal(10,4) NOT NULL,
-  PRIMARY KEY (`menus_id`,`ingredients_id`),
-  KEY `ingredients_id` (`ingredients_id`),
-  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`menus_id`) REFERENCES `menus` (`id`),
-  CONSTRAINT `recipes_ibfk_2` FOREIGN KEY (`ingredients_id`) REFERENCES `ingredients` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE transactions(
+    id INT NOT NULL AUTO_INCREMENT,
+    transaction_date TIMESTAMP NOT NULL NOT NULL,
+    price  DECIMAL(19,4) NOT NULL,
+    orders_id INT,
+    type ENUM('debit', 'kredit'),
 
---
--- Table structure for table `tables`
---
+    PRIMARY KEY(id),
+    FOREIGN KEY (orders_id) REFERENCES orders(id)
+);
 
-DROP TABLE IF EXISTS `tables`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tables` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `tables_num` int NOT NULL,
-  `tables_capacity` int NOT NULL,
-  `available` tinyint NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE transactions_has_ingredients(
+    transactions_id INT NOT NULL,
+    ingredients_id INT NOT NULL,
+    quantity_in_grams DECIMAL(10,4) NOT NULL,
 
---
--- Table structure for table `transactions`
---
+    PRIMARY KEY(transactions_id, ingredients_id),
+    FOREIGN KEY (transactions_id) REFERENCES transactions(id),
+    FOREIGN KEY (ingredients_id) REFERENCES ingredients(id)
+);
 
-DROP TABLE IF EXISTS `transactions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transactions` (
-  `id` int NOT NULL,
-  `transaction_date` datetime NOT NULL,
-  `price` decimal(19,4) NOT NULL,
-  `orders_id` int DEFAULT NULL,
-  `type` enum('debit','kredit') DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orders_id` (`orders_id`),
-  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `transactions_has_inventories`
---
 
-DROP TABLE IF EXISTS `transactions_has_inventories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transactions_has_inventories` (
-  `transactions_id` int NOT NULL,
-  `inventories_id` int NOT NULL,
-  `quantity_in_grams` decimal(10,4) NOT NULL,
-  PRIMARY KEY (`transactions_id`,`inventories_id`),
-  KEY `inventories_id` (`inventories_id`),
-  CONSTRAINT `transactions_has_inventories_ibfk_1` FOREIGN KEY (`transactions_id`) REFERENCES `transactions` (`id`),
-  CONSTRAINT `transactions_has_inventories_ibfk_2` FOREIGN KEY (`inventories_id`) REFERENCES `inventories` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO tables (tables_num, tables_capacity, avaliable) VALUES(1,2,1),(2,4,1),(3,6,1),(4,2,1),(5,4,1),(6,7,1),(7,2,1),(8,2,1);
 
---
--- Table structure for table `users`
---
+INSERT INTO menus (name, price) VALUES('Cheese Burger', 35.00), ('Egg Burger', 50.00), ('Fried Burger', 15.00);
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` enum('waiter','chef','manager') DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO users  (username, password, role) VALUES ('customer1', '123', 'customer'), ('zian', '123', 'waiter'), ('rafael', '123', 'chef'), ('eja', '123', 'manager');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+INSERT INTO ingredients (name, quantity_in_grams) VALUES('Bread',1000), ('Cheese',1500), ('Egg',2000), ('Meat',10000), ('Lettuce',1000), ('Tomato',500);
 
--- Dump completed on 2022-03-09 15:13:13
+INSERT INTO recipes (menus_id, ingredients_id, quantity_in_grams) VALUES(1, 1, 100), (1, 2, 100), (1, 3, 100), (1, 4, 100), (1, 5, 100), (1, 6, 100), (2, 1, 100), (2, 2, 100), (2, 3, 100), (2, 4, 100), (2, 5, 100), (2, 6, 100), (3, 1, 100), (3, 2, 100), (3, 3, 100), (3, 4, 100), (3, 5, 100), (3, 6, 100);

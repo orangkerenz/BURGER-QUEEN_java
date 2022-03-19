@@ -18,36 +18,6 @@ public class Menu {
         this.timesOrdered = new SimpleIntegerProperty(0);
     }
 
-    public Menu(Integer id, String name, String avaliable) {
-        this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.avaliable = new SimpleStringProperty(avaliable);
-    }
-
-    public Menu(Integer id, String name, String avaliable, Double price) {
-        this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.avaliable = new SimpleStringProperty(avaliable);
-        this.price = new SimpleDoubleProperty(price);
-    }
-
-    public Menu(String name, Double price, Integer timesOrdered) {
-        this.name = new SimpleStringProperty(name);
-        this.price = new SimpleDoubleProperty(price);
-        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
-    }
-
-    public Menu(Integer id, String name, Integer timesOrdered) {
-        this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
-    }
-
-    public Menu(String name, Integer timesOrdered) {
-        this.name = new SimpleStringProperty(name);
-        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
-    }
-
     public int getId() {
         return id.get();
     }
