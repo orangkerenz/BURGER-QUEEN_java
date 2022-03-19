@@ -1,15 +1,18 @@
 package controller;
 
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.Node;
-import javafx.stage.Stage;
+import model.User;
+import tools.AlertTools;
+import tools.CurrentLoginUser;
+import tools.DatabaseTools;
 import tools.JavafxTools;
 
 public class LoginController {
@@ -23,27 +26,68 @@ public class LoginController {
     @FXML
     void login(ActionEvent event) {
 
+        try {
+            String username = null;
+            String password = null;
+            Connection conn = null;
+            Statement statement = null;
+            ResultSet resultSet = null;
+
+            username = usernameTf.getText();
+            password = passwordTf.getText();
+
+            if (!username.isBlank() && !password.isBlank()) {
+
+                conn = DatabaseTools.getConnection();
+                statement = conn.createStatement();
+                resultSet = statement.executeQuery(
+                        "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'");
+
+                if (resultSet.next()) {
+                    User user = new User(resultSet.getInt("id"), resultSet.getString("username"),
+                            resultSet.getString("password"), resultSet.getString("role"));
+
+                    CurrentLoginUser.setCurrentUser(user);
+
+                    switch (user.getRole()) {
+                        case "waiter":
+                            JavafxTools.changeSceneActionEvent(event, "../view/MenuWaiterPage.fxml");
+                            break;
+
+                        case "chef":
+                            JavafxTools.changeSceneActionEvent(event, "../view/MenuChefPage.fxml");
+                            break;
+
+                        case "manager":
+                            JavafxTools.changeSceneActionEvent(event, "../view/MenuManagerPage.fxml");
+                            break;
+
+                        case "customer":
+                            JavafxTools.changeSceneActionEvent(event, "../view/TableNumberConfirmationPage.fxml");
+                            break;
+                    }
+
+                } else {
+                    AlertTools.setAlert("Error", null, "Username Or Password Is Invalid!", AlertType.ERROR);
+                }
+
+                conn.close();
+                statement.close();
+                resultSet.close();
+
+            } else {
+                AlertTools.setAlert("Login", "Login Failed", "Please Fill All Fields", AlertType.ERROR);
+            }
+
+        } catch (Exception e) {
+            AlertTools.setAlert("Error!", null, "Segera Hubungi Admin!", AlertType.ERROR);
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
     void backBtn(MouseEvent event) {
-        try {
-            // ambil fxml yang dituju
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/WelcomePage.fxml"));
-            // load fxml
-            Parent root = loader.load();
-            // ambil stage/frame yang sekarang
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // buat scene baru dan tempelin root yang ingin dituju
-            Scene scene = new Scene(root);
-            // stage yang sekarang ambil dan tempelin scene yang baru/ingin dituju
-            stage.setScene(scene);
-            // show stage yang baru
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         JavafxTools.changeSceneMouseEvent(event, "../view/WelcomePage.fxml");
     }
 
