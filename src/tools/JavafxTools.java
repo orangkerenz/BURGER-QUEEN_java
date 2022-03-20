@@ -1,11 +1,14 @@
 package tools;
 
 import java.io.IOException;
+import java.sql.Connection;
 
+import controller.ListOfMenuViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -32,6 +35,12 @@ public class JavafxTools {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void setTextFieldEmpty(TextField... tf) {
+        for (TextField textField : tf) {
+            textField.setText("");
         }
     }
 

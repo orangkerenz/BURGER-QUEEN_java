@@ -4,10 +4,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import com.mysql.cj.jdbc.Driver;
 
-public class GetConnection {
+public class DatabaseTools {
 
     public static java.sql.Connection getConnection() {
         String databaseName = "";
@@ -47,6 +50,25 @@ public class GetConnection {
             System.err.println("Connection To Database Error");
         }
         return conn;
+    }
+
+    public static void closeQueryOperation(java.sql.Connection conn, Statement statement, ResultSet resultSet) {
+        try {
+            conn.close();
+            statement.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            System.err.println("Connection Close Error");
+        }
+    }
+
+    public static void closeQueryOperation(java.sql.Connection conn, Statement statement) {
+        try {
+            conn.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.err.println("Connection Close Error");
+        }
     }
 
 }
