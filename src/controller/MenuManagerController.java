@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -19,6 +17,7 @@ public class MenuManagerController {
     @FXML
     void inventoryBtn(ActionEvent event) {
         JavafxTools.changeSceneActionEvent(event, "../view/InventoryPage.fxml");
+        // System.out.println("halo");
     }
 
     @FXML
