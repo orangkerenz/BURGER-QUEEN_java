@@ -10,11 +10,20 @@ public class Ingredients {
     private SimpleIntegerProperty ingredientsId;
     private SimpleDoubleProperty grams;
 
-    public Ingredients(int menuid, String ingredientsName, Double grams, Integer ingredientsId) {
-        this.menuid = new SimpleIntegerProperty(menuid);
+    public Ingredients(Integer ingredientsId, String ingredientsName, Double grams) {
         this.ingredientsName = new SimpleStringProperty(ingredientsName);
         this.grams = new SimpleDoubleProperty(grams);
         this.ingredientsId = new SimpleIntegerProperty(ingredientsId);
+    }
+
+    public Ingredients(int id, String ingredientsName) {
+        this.ingredientsId = new SimpleIntegerProperty(id);
+        this.ingredientsName = new SimpleStringProperty(ingredientsName);
+    }
+
+    public Ingredients(String name, double grams) {
+        this.ingredientsName = new SimpleStringProperty(name);
+        this.grams = new SimpleDoubleProperty(grams);
     }
 
     public int getMenuid() {

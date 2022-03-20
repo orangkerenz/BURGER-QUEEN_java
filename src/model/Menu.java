@@ -9,13 +9,21 @@ public class Menu {
     private SimpleStringProperty name;
     private SimpleDoubleProperty price;
     private SimpleIntegerProperty timesOrdered;
-    private SimpleStringProperty avaliable;
+    private SimpleStringProperty availableString;
+    private SimpleIntegerProperty availableNum;
 
     public Menu(Integer id, String name, Double price) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleDoubleProperty(price);
         this.timesOrdered = new SimpleIntegerProperty(0);
+    }
+
+    public Menu(Integer id, String name, int available) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.availableString = (available == 1) ? new SimpleStringProperty("Yes") : new SimpleStringProperty("No");
+        this.availableNum = new SimpleIntegerProperty(available);
     }
 
     public int getId() {
@@ -50,11 +58,15 @@ public class Menu {
         this.timesOrdered.set(timesOrdered);
     }
 
-    public String getAvaliable() {
-        return avaliable.get();
+    public String getAvailableString() {
+        return availableString.get();
     }
 
-    public void setAvaliable(String avaliable) {
-        this.avaliable.set(avaliable);
+    public int getAvailableNum() {
+        return availableNum.get();
+    }
+
+    public void setAvailableNum(int availableNum) {
+        this.availableNum.set(availableNum);
     }
 }
