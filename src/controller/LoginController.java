@@ -69,6 +69,8 @@ public class LoginController {
 
                 } else {
                     AlertTools.setAlert("Error", null, "Username Or Password Is Invalid!", AlertType.ERROR);
+
+                    JavafxTools.setTextFieldEmpty(usernameTf, passwordTf);
                 }
 
                 conn.close();
