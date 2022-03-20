@@ -206,6 +206,6 @@ public class AddNewMenuController {
 
     @FXML
     void backBtn(MouseEvent event) {
-        JavafxTools.changeSceneMouseEvent(event, "../view/ListOfMenuController.java");
+        JavafxTools.changeSceneMouseEvent(event, "../view/ListOfMenuPage.fxml");
     }
 }
