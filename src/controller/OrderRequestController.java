@@ -7,17 +7,16 @@ import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.stage.Stage;
-
 import model.Order;
 import tools.AlertTools;
 import tools.DatabaseTools;
@@ -51,6 +50,11 @@ public class OrderRequestController {
     }
 
     @FXML
+    void backBtn(MouseEvent event) {
+        JavafxTools.changeSceneMouseEvent(event, "../view/MenuChefPage.fxml");
+    }
+
+    @FXML
     void doneOnAction(ActionEvent event) {
         Order order = table.getSelectionModel().getSelectedItem();
 
@@ -58,23 +62,23 @@ public class OrderRequestController {
 
             Connection conn = null;
             Statement stmt = null;
-            ResultSet rs = null;
 
             try {
                 conn = DatabaseTools.getConnection();
                 stmt = conn.createStatement();
-                String sql = "UPDATE `orders` SET `status` = 'order_recieved' WHERE orders.id = " + order.getId();
+                String sql = "UPDATE `orders` SET `status` = 'ready' WHERE orders.id = " + order.getId();
                 int affectedRows = stmt.executeUpdate(sql);
 
                 if (affectedRows > 0) {
                     AlertTools.setAlert("Success!", null, "Order Have Been Mark Done!", AlertType.INFORMATION);
 
                     setTable();
+
                 } else {
                     AlertTools.setAlert("Error!", null, "Contact Support!", AlertType.ERROR);
                 }
 
-                DatabaseTools.closeQueryOperation(conn, stmt, rs);
+                DatabaseTools.closeQueryOperation(conn, stmt);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,7 +89,8 @@ public class OrderRequestController {
         }
     }
 
-    void viewOnAction(ActionEvent event) {
+    @FXML
+    void viewBtn(ActionEvent event) {
         Order order = table.getSelectionModel().getSelectedItem();
 
         if (order != null) {
@@ -116,12 +121,8 @@ public class OrderRequestController {
         }
     }
 
-    @FXML
-    void backBtn(MouseEvent event) {
-        JavafxTools.changeSceneMouseEvent(event, "../view/MenuChefPage.fxml");
-    }
-
     private void setTable() {
+        table.getItems().clear();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
