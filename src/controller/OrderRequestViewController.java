@@ -47,12 +47,11 @@ public class OrderRequestViewController {
     void doneOnAction(ActionEvent event) {
         Connection conn = null;
         Statement stmt = null;
-        ResultSet rs = null;
 
         try {
             conn = DatabaseTools.getConnection();
             stmt = conn.createStatement();
-            String sql = "UPDATE `orders` SET `status` = 'order_recieved' WHERE orders.id = " + order.getId();
+            String sql = "UPDATE `orders` SET `status` = 'ready' WHERE orders.id = " + order.getId();
             int affectedRows = stmt.executeUpdate(sql);
 
             if (affectedRows > 0) {
@@ -63,7 +62,7 @@ public class OrderRequestViewController {
                 AlertTools.setAlert("Error!", null, "Contact Support!", AlertType.ERROR);
             }
 
-            DatabaseTools.closeQueryOperation(conn, stmt, rs);
+            DatabaseTools.closeQueryOperation(conn, stmt);
 
         } catch (Exception e) {
             e.printStackTrace();
