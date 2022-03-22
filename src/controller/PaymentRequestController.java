@@ -45,33 +45,6 @@ public class PaymentRequestController {
         setTable();
     }
 
-    private void setTable() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DatabaseTools.getConnection();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(
-                    "SELECT * FROM `orders` WHERE paid = 0 AND status != 'canceled' AND DATE(order_date) = CURDATE() ");
-
-            while (rs.next()) {
-                Order order = new Order(rs.getInt("orders.id"), rs.getString("orders.order_date"),
-                        rs.getInt("orders.table_number"),
-                        rs.getDouble("orders.total_price"));
-
-                table.getItems().add(order);
-
-            }
-
-            DatabaseTools.closeQueryOperation(conn, stmt, rs);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     void paidButton(ActionEvent event) {
         Order order = table.getSelectionModel().getSelectedItem();
@@ -132,6 +105,33 @@ public class PaymentRequestController {
         }
 
         return 0;
+    }
+
+    private void setTable() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DatabaseTools.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(
+                    "SELECT * FROM `orders` WHERE paid = 0 AND status != 'canceled' AND DATE(order_date) = CURDATE() ");
+
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("orders.id"), rs.getString("orders.order_date"),
+                        rs.getInt("orders.table_number"),
+                        rs.getDouble("orders.total_price"));
+
+                table.getItems().add(order);
+
+            }
+
+            DatabaseTools.closeQueryOperation(conn, stmt, rs);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
