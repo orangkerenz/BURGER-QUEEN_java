@@ -24,9 +24,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="Example.PNG" alt="Logo" width="80" height="80">
-  </a>
+
+    <img src="Logo.png" alt="Logo" width="80" height="80">
+
 
   <h3 align="center">Burger Queen</h3>
 
@@ -63,7 +63,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot]  <img src="Example.png" alt="Logo" width="427" height="923"> (https://example.com)
 
 Simple Restaurant Reservation, Inventory and Order Program
 <p align="right">(<a href="#top">back to top</a>)</p>
