@@ -35,6 +35,8 @@ public class TableNumberConfirmationController {
     public void initialize() {
         setTableNumberCb();
 
+        Order.cancelOrderBiggerThanOneDay();
+
     }
 
     @FXML
