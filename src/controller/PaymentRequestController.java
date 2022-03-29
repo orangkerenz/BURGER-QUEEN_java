@@ -46,6 +46,106 @@ public class PaymentRequestController {
     }
 
     @FXML
+    void cancelBtn(ActionEvent event) {
+        Order order = table.getSelectionModel().getSelectedItem();
+        Connection conn = null;
+        Statement stmt = null;
+        int affectedRows1;
+        int affectedRows2;
+
+        if (order != null) {
+            try {
+                conn = DatabaseTools.getConnection();
+                Statement queryOrders = conn.createStatement();
+                ResultSet rsOrders = queryOrders
+                        .executeQuery(
+                                "SELECT * FROM orders WHERE id = '" + order.getId() + "'");
+
+                while (rsOrders.next()) {
+                    Statement queryMenu = conn.createStatement();
+                    ResultSet rsMenu = queryMenu
+                            .executeQuery(
+                                    "SELECT * FROM menus_has_orders WHERE order_id = '" + rsOrders.getInt("id") + "'");
+
+                    while (rsMenu.next()) {
+                        Statement queryRecipeMenu = conn.createStatement();
+                        ResultSet rsRecipeMenu = queryRecipeMenu
+                                .executeQuery(
+                                        "SELECT * FROM recipes WHERE menu_id = '" + rsMenu.getInt("menu_id") + "'");
+                        while (rsRecipeMenu.next()) {
+                            double quantityWantToReturn = rsRecipeMenu.getDouble("quantity_in_grams")
+                                    * rsMenu.getInt("quantity");
+
+                            Statement updateRecipe = conn.createStatement();
+                            updateRecipe.executeUpdate(
+                                    "UPDATE ingredients SET quantity_in_grams = quantity_in_grams + "
+                                            + quantityWantToReturn
+                                            + " WHERE id = '" + rsRecipeMenu.getInt("ingredient_id") + "'");
+                        }
+                    }
+
+                    Statement deleteMenusHasOrder = conn.createStatement();
+                    deleteMenusHasOrder.executeUpdate(
+                            "DELETE FROM menus_has_orders WHERE order_id = '" + rsOrders.getInt("id") + "'");
+
+                    Statement cancelOrder = conn.createStatement();
+                    cancelOrder
+                            .executeUpdate(
+                                    "UPDATE orders SET status = 'canceled' WHERE id = '" + rsOrders.getInt("id") + "'");
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                conn = DatabaseTools.getConnection();
+                stmt = conn.createStatement();
+                String sql = "UPDATE tables SET available = 1 WHERE table_number = " + order.getTableNum();
+                affectedRows1 = stmt.executeUpdate(sql);
+
+                if (affectedRows1 > 0) {
+                    AlertTools.setAlert("Success", null, "Table Placed Has Been Available For Other Customer!",
+                            Alert.AlertType.INFORMATION);
+                } else {
+                    AlertTools.setAlert("Error", null, "Table Placed Has Not Been Available For Other Customer!",
+                            Alert.AlertType.ERROR);
+                }
+
+                DatabaseTools.closeQueryOperation(conn, stmt);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                conn = DatabaseTools.getConnection();
+                stmt = conn.createStatement();
+                affectedRows1 = stmt
+                        .executeUpdate("UPDATE `orders` SET status = 'canceled' WHERE id = " + order.getId());
+                affectedRows2 = addTransaction(order);
+
+                if (affectedRows1 > 0 && affectedRows2 > 0) {
+                    AlertTools.setAlert("Success", null, "Order Has Been Canceled!", Alert.AlertType.INFORMATION);
+
+                    table.getItems().remove(order);
+
+                } else {
+                    AlertTools.setAlert("Error", null, "Contact Support!", AlertType.ERROR);
+                }
+
+                DatabaseTools.closeQueryOperation(conn, stmt);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            AlertTools.setAlert("Error", null, "Please Select An Order!", AlertType.ERROR);
+        }
+
+    }
+
+    @FXML
     void paidButton(ActionEvent event) {
         Order order = table.getSelectionModel().getSelectedItem();
         Connection conn = null;
