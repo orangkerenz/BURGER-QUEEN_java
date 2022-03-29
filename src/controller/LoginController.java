@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javafx.event.ActionEvent;
@@ -14,6 +15,13 @@ import tools.AlertTools;
 import tools.CurrentLoginUser;
 import tools.DatabaseTools;
 import tools.JavafxTools;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+
+import javafx.stage.Stage;
 
 public class LoginController {
 
@@ -63,7 +71,48 @@ public class LoginController {
                             break;
 
                         case "customer":
-                            JavafxTools.changeSceneActionEvent(event, "../view/TableNumberConfirmationPage.fxml");
+
+                            try {
+                                conn = DatabaseTools.getConnection();
+                                statement = conn.createStatement();
+                                resultSet = statement.executeQuery(
+                                        "SELECT * FROM orders WHERE customer_id = " + user.getId()
+                                                + " AND status != 'canceled' AND status != 'completed' AND  DATE(order_date) = CURDATE()");
+
+                                if (resultSet.next()) {
+                                    AlertTools.setAlert("Alert!", null, "You Have Ongoing Orders!",
+                                            AlertType.INFORMATION);
+
+                                    FXMLLoader loader = new FXMLLoader(
+                                            getClass().getResource("../view/OrderConfirmationPage.fxml"));
+
+                                    Parent root = loader.load();
+
+                                    OrderConfirmationController orderConfirmationController = loader
+                                            .getController();
+
+                                    orderConfirmationController.setOrderId(resultSet.getInt("id"));
+
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                                    Scene scene = new Scene(root);
+
+                                    stage.setScene(scene);
+
+                                    stage.show();
+
+                                } else {
+                                    JavafxTools.changeSceneActionEvent(event,
+                                            "../view/TableNumberConfirmationPage.fxml");
+                                }
+
+                                DatabaseTools.closeQueryOperation(conn, statement, resultSet);
+
+                            } catch (SQLException e) {
+                                AlertTools.setAlert("Error", null, "Contact Support!", AlertType.ERROR);
+                                e.printStackTrace();
+                            }
+
                             break;
                     }
 
