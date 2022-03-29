@@ -25,9 +25,6 @@ public class DatabaseTools {
             databaseUsername = properties.getProperty("database.username");
             databasePassword = properties.getProperty("database.password");
 
-            System.out.println(databaseName);
-            System.out.println(databaseUsername);
-
         } catch (FileNotFoundException exception) {
             System.err.println("Gagal Load File Dari Url");
         } catch (IOException exception) {

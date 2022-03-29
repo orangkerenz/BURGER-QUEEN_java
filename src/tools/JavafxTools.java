@@ -3,7 +3,6 @@ package tools;
 import java.io.IOException;
 import java.sql.Connection;
 
-import controller.ListOfMenuViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,6 +41,10 @@ public class JavafxTools {
         for (TextField textField : tf) {
             textField.setText("");
         }
+    }
+
+    public static Connection getConnection() {
+        return null;
     }
 
 }
