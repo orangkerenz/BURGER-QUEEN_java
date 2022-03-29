@@ -98,6 +98,11 @@ This is an example of how to list things you need to use the software and how to
   ```Install Javafx connector
   https://openjfx.io/
   ```
+* MYSQL
+  ```Install MYSQL
+  https://dev.mysql.com/downloads/mysql/
+  ```  
+
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
@@ -106,9 +111,9 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    git clone https://github.com/orangkerenz/BURGER-QUEEN_java
    ```
-2. Run Mysql File
+2. Import MYSQL File
    ```
-   burger_queen_2022-03-20_154726.sql
+  burger_queen_2022-03-29_154926.sql
    ```
 3. Install Javafx Connector On The Project
 4. Install JDBC Connector On The Project
