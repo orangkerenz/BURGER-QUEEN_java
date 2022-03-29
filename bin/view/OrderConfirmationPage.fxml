@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="428.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderConfirmationController">
    <children>
-      <Text fill="WHITE" layoutX="48.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order" wrappingWidth="310.5703125">
+      <Text fx:id="orderText" fill="WHITE" layoutX="48.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order #" wrappingWidth="310.5703125">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -19,16 +19,16 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Button fx:id="doneBtn" layoutX="48.0" layoutY="735.0" mnemonicParsing="false" onAction="#doneOnAction" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Done" textFill="WHITE">
+      <Button fx:id="doneBtn" layoutX="48.0" layoutY="735.0" mnemonicParsing="false" onAction="#doneOnAction" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800;" text="Paid" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <TableView fx:id="table" layoutX="48.0" layoutY="306.0" prefHeight="229.0" prefWidth="332.0">
         <columns>
-          <TableColumn fx:id="menuNameCol" prefWidth="171.0" text="Menu Name" />
-          <TableColumn fx:id="priceCol" prefWidth="89.0" text="Price" />
-            <TableColumn fx:id="quantityCol" prefWidth="71.0" text="Quantity" />
+          <TableColumn fx:id="menuNameCol" prefWidth="185.0" text="Menu Name" />
+          <TableColumn fx:id="priceCol" prefWidth="88.0" text="Price" />
+            <TableColumn fx:id="quantityCol" prefWidth="58.0" text="Quantity" />
         </columns>
       </TableView>
       <Text fx:id="totalText" fill="WHITE" layoutX="158.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total        $-" wrappingWidth="221.5703125">
@@ -41,12 +41,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Text fx:id="informationText" fill="RED" layoutX="289.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="orderIdText" fill="WHITE" layoutX="48.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order id 54">
+      <Text fx:id="informationText" fill="RED" layoutX="48.0" layoutY="656.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

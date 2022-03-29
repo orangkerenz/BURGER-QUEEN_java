@@ -73,6 +73,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="menuAvalTf" layoutX="48.0" layoutY="408.0" prefHeight="40.0" prefWidth="160.0" />
+      <ComboBox fx:id="menuAvalCb" layoutX="48.0" layoutY="408.0" prefHeight="40.0" prefWidth="160.0" />
    </children>
 </AnchorPane>
