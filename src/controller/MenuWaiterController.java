@@ -3,10 +3,16 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import model.Order;
 import tools.AlertTools;
 import tools.JavafxTools;
 
 public class MenuWaiterController {
+
+    public void initialize() {
+        Order.cancelOrderBiggerThanOneDay();
+        System.out.println("pagi");
+    }
 
     @FXML
     void logoutOnAction(ActionEvent event) {
