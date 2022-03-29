@@ -19,11 +19,23 @@ public class Menu {
         this.timesOrdered = new SimpleIntegerProperty(0);
     }
 
-    public Menu(Integer id, String name, int available) {
+    public Menu(String name, Double price, int timesOrdered) {
+        this.name = new SimpleStringProperty(name);
+        this.price = new SimpleDoubleProperty(price);
+        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
+    }
+
+    public Menu(Integer id, String name, int available, double price) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.availableString = (available == 1) ? new SimpleStringProperty("Yes") : new SimpleStringProperty("No");
         this.availableNum = new SimpleIntegerProperty(available);
+        this.price = new SimpleDoubleProperty(price);
+    }
+
+    public Menu(String name, int timesOrdered) {
+        this.name = new SimpleStringProperty(name);
+        this.timesOrdered = new SimpleIntegerProperty(timesOrdered);
     }
 
     public int getId() {
