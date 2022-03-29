@@ -3,11 +3,17 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import model.Order;
 import tools.AlertTools;
 import tools.CurrentLoginUser;
 import tools.JavafxTools;
 
 public class MenuChefController {
+
+    public void initialize() {
+        Order.cancelOrderBiggerThanOneDay();
+        System.out.println("pagi");
+    }
 
     @FXML
     void orderRequestOnAction(ActionEvent event) {
