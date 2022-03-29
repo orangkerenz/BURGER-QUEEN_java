@@ -63,7 +63,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot]  <img src="Example.png" alt="Logo" width="427" height="923"> (https://example.com)
+![Screenshot](Example.PNG)
 
 Simple Restaurant Reservation, Inventory and Order Program
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -72,7 +72,6 @@ Simple Restaurant Reservation, Inventory and Order Program
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [Java](https://docs.oracle.com/en/java/)
 * [JDBC](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/)
@@ -83,9 +82,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
@@ -105,15 +101,13 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Clone the repo
    ```sh
    git clone https://github.com/orangkerenz/BURGER-QUEEN_java
    ```
 2. Import MYSQL File
-   ```
-  burger_queen_2022-03-29_154926.sql
+   ```sh
+   git clone burger_queen_2022-03-29_154926.sql
    ```
 3. Install Javafx Connector On The Project
 4. Install JDBC Connector On The Project
