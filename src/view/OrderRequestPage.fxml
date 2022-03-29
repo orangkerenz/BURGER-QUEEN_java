@@ -26,15 +26,17 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <Button layoutX="48.0" layoutY="667.0" mnemonicParsing="false" onAction="#viewOnAction" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800; -fx-background-radius: 8;" text="View" textFill="WHITE">
+      <Button layoutX="48.0" layoutY="667.0" mnemonicParsing="false" onAction="#viewBtn" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: ffb800; -fx-background-radius: 8;" text="View" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <TableView fx:id="table" layoutX="48.0" layoutY="306.0" prefHeight="327.0" prefWidth="332.0">
         <columns>
-          <TableColumn fx:id="orderIdCol" prefWidth="167.0" text="ORDER ID" />
-          <TableColumn fx:id="tableCol" prefWidth="164.0" text="TABLE" />
+          <TableColumn fx:id="nameCol" prefWidth="66.0" text="NAME" />
+          <TableColumn fx:id="orderIdCol" prefWidth="78.0" text="ORDER ID" />
+            <TableColumn fx:id="tableCol" prefWidth="65.0" text="TABLE" />
+            <TableColumn fx:id="dateCol" minWidth="0.0" prefWidth="122.0" text="DATE" />
         </columns>
       </TableView>
       <Button layoutX="48.0" layoutY="759.0" mnemonicParsing="false" onAction="#doneOnAction" prefHeight="69.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 8;" text="Done" textFill="#ffb800">
