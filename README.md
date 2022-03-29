@@ -82,7 +82,6 @@ Simple Restaurant Reservation, Inventory and Order Program
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * JDBC
   ```Install JDBC connector
   https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
