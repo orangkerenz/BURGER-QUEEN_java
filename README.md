@@ -25,7 +25,7 @@
 <br />
 <div align="center">
 
-    <img src="Logo.png" alt="Logo" width="80" height="80">
+    ![Screenshot](Logo.PNG)
 
 
   <h3 align="center">Burger Queen</h3>
