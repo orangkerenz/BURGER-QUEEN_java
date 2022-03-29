@@ -120,9 +120,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/orangkerenz/BURGER-QUEEN_java](https://github.com/orangkerenz/BURGER-QUEEN_java)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
