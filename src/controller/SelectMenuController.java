@@ -2,7 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart.Data;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -15,26 +15,18 @@ import tools.DatabaseTools;
 import tools.JavafxTools;
 
 import java.io.IOException;
-import java.lang.Thread.State;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+import javafx.stage.Stage;
 
 public class SelectMenuController {
 
@@ -252,7 +244,13 @@ public class SelectMenuController {
                 }
             } else {
                 AlertTools.setAlert("Error!", null, "No Order Selected!", AlertType.ERROR);
+
+                DatabaseTools.closeQueryOperation(conn, stmtQueryMenusHasOrder, rsQueryMenusHasOrder);
+
+                return;
             }
+
+            DatabaseTools.closeQueryOperation(conn, stmtQueryMenusHasOrder, rsQueryMenusHasOrder);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,6 +259,51 @@ public class SelectMenuController {
     @FXML
     void backBtn(MouseEvent event) {
         JavafxTools.changeSceneMouseEvent(event, "../view/TableNumberConfirmationPage.fxml");
+
+        try {
+            Connection conn = DatabaseTools.getConnection();
+            Statement queryOrders = conn.createStatement();
+            ResultSet rsOrders = queryOrders
+                    .executeQuery(
+                            "SELECT * FROM orders WHERE id = '" + OrderIdAndTableNumber.getId() + "'");
+
+            while (rsOrders.next()) {
+                Statement queryMenu = conn.createStatement();
+                ResultSet rsMenu = queryMenu
+                        .executeQuery(
+                                "SELECT * FROM menus_has_orders WHERE order_id = '" + rsOrders.getInt("id") + "'");
+
+                while (rsMenu.next()) {
+                    Statement queryRecipeMenu = conn.createStatement();
+                    ResultSet rsRecipeMenu = queryRecipeMenu
+                            .executeQuery(
+                                    "SELECT * FROM recipes WHERE menu_id = '" + rsMenu.getInt("menu_id") + "'");
+                    while (rsRecipeMenu.next()) {
+                        double quantityWantToReturn = rsRecipeMenu.getDouble("quantity_in_grams")
+                                * rsMenu.getInt("quantity");
+
+                        Statement updateRecipe = conn.createStatement();
+                        updateRecipe.executeUpdate(
+                                "UPDATE ingredients SET quantity_in_grams = quantity_in_grams + "
+                                        + quantityWantToReturn
+                                        + " WHERE id = '" + rsRecipeMenu.getInt("ingredient_id") + "'");
+                    }
+                }
+
+                Statement deleteMenusHasOrder = conn.createStatement();
+                deleteMenusHasOrder.executeUpdate(
+                        "DELETE FROM menus_has_orders WHERE order_id = '" + rsOrders.getInt("id") + "'");
+
+                Statement cancelOrder = conn.createStatement();
+                cancelOrder
+                        .executeUpdate(
+                                "UPDATE orders SET status = 'canceled' WHERE id = '" + rsOrders.getInt("id") + "'");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         try {
             Connection conn = DatabaseTools.getConnection();
