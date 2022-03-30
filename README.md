@@ -20,19 +20,16 @@
 
 
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="Logo.PNG" alt="Logo" width="400" height="200">
+  </a>
 
-    <img src="Logo.png" alt="Logo" width="80" height="80">
+  <h3 align="center">Burger Queen Restaurant</h3>
 
 
-  <h3 align="center">Burger Queen</h3>
-
-  <p align="center">
-    Simple Restaurant Program In Java
-  </p>
 </div>
 
 
@@ -63,7 +60,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot]  <img src="Example.png" alt="Logo" width="427" height="923"> (https://example.com)
+![Screenshot](Example.PNG)
 
 Simple Restaurant Reservation, Inventory and Order Program
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -72,7 +69,6 @@ Simple Restaurant Reservation, Inventory and Order Program
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [Java](https://docs.oracle.com/en/java/)
 * [JDBC](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/)
@@ -84,12 +80,8 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * JDBC
   ```Install JDBC connector
   https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
@@ -98,17 +90,20 @@ This is an example of how to list things you need to use the software and how to
   ```Install Javafx connector
   https://openjfx.io/
   ```
-### Installation
+* MYSQL
+  ```Install MYSQL
+  https://dev.mysql.com/downloads/mysql/
+  ```  
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+### Installation
 
 1. Clone the repo
    ```sh
    git clone https://github.com/orangkerenz/BURGER-QUEEN_java
    ```
-2. Run Mysql File
-   ```
-   burger_queen_2022-03-20_154726.sql
+2. Import MYSQL File
+   ```sh
+    burger_queen_2022-03-29_154926.sql
    ```
 3. Install Javafx Connector On The Project
 4. Install JDBC Connector On The Project
@@ -124,9 +119,7 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/orangkerenz/BURGER-QUEEN_java](https://github.com/orangkerenz/BURGER-QUEEN_java)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
