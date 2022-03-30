@@ -42,6 +42,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+         <li><a href="#ERD">ERD</a></li>
       </ul>
     </li>
     <li>
@@ -63,6 +64,14 @@
 ![Screenshot](Example.PNG)
 
 Simple Restaurant Reservation, Inventory and Order Program
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- ABOUT THE PROJECT -->
+## ERD
+
+![Screenshot](ERD.PNG)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
