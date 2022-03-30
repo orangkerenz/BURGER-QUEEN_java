@@ -103,7 +103,7 @@ Simple Restaurant Reservation, Inventory and Order Program
    ```
 2. Import MYSQL File
    ```sh
-   git clone burger_queen_2022-03-29_154926.sql
+    burger_queen_2022-03-29_154926.sql
    ```
 3. Install Javafx Connector On The Project
 4. Install JDBC Connector On The Project
