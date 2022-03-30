@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="Logo.PNG" alt="Logo" width="400" height="200">
+    <img src="Logo.PNG" >
   </a>
 
   <h3 align="center">Burger Queen Restaurant</h3>
