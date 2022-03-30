@@ -23,8 +23,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="Logo.PNG" alt="Logo" width="400" height="200">
+  <a href="https://github.com/orangkerenz/BURGER-QUEEN_java">
+    <img src="Logo.PNG">
   </a>
 
   <h3 align="center">Burger Queen Restaurant</h3>
@@ -42,6 +42,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+         <li><a href="#ERD">ERD</a></li>
       </ul>
     </li>
     <li>
@@ -63,6 +64,14 @@
 ![Screenshot](Example.PNG)
 
 Simple Restaurant Reservation, Inventory and Order Program
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- ABOUT THE PROJECT -->
+## ERD
+
+![Screenshot](ERD.PNG)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
