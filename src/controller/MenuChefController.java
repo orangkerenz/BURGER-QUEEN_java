@@ -39,4 +39,9 @@ public class MenuChefController {
         JavafxTools.changeSceneActionEvent(event, "../view/InventoryPage.fxml");
     }
 
+    @FXML
+    void dashboardOnAction(ActionEvent event) {
+        JavafxTools.changeSceneActionEvent(event, "../view/DashboardChefPage.fxml");
+    }
+
 }

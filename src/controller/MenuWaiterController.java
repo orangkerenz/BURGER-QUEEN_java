@@ -28,9 +28,12 @@ public class MenuWaiterController {
 
     @FXML
     void servedRequestOnAction(ActionEvent event) {
-
         JavafxTools.changeSceneActionEvent(event, "../view/ServedRequestPage.fxml");
+    }
 
+    @FXML
+    void dashboardOnAction(ActionEvent event) {
+        JavafxTools.changeSceneActionEvent(event, "../view/DashboardWaiterPage.fxml");
     }
 
 }
