@@ -48,4 +48,9 @@ public class MenuManagerController {
         JavafxTools.changeSceneActionEvent(event, "../view/AddTablePage.fxml");
     }
 
+    @FXML
+    void dashboardBtn(ActionEvent event) {
+        JavafxTools.changeSceneActionEvent(event, "../view/DashboardManagerPage.fxml");
+    }
+
 }
