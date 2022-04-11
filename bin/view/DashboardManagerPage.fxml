@@ -20,7 +20,7 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="46.0" layoutY="281.0" prefHeight="130.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
+      <AnchorPane layoutX="46.0" layoutY="281.0" prefHeight="117.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
          <children>
             <Text fill="#ffb800" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Debit" wrappingWidth="261.13671875">
                <font>
@@ -34,7 +34,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="46.0" layoutY="421.0" prefHeight="130.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
+      <AnchorPane layoutX="46.0" layoutY="405.0" prefHeight="117.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
          <children>
             <Text fill="#ffb800" layoutX="12.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Kredit" wrappingWidth="312.5703125">
                <font>
@@ -60,12 +60,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="46.0" layoutY="850.0" mnemonicParsing="false" onAction="#search" prefHeight="48.0" prefWidth="336.0" style="-fx-background-color: white;" text="Search">
+      <Button layoutX="46.0" layoutY="792.0" mnemonicParsing="false" onAction="#search" prefHeight="64.0" prefWidth="336.0" style="-fx-background-color: ffb800;" text="Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <AnchorPane layoutX="46.0" layoutY="561.0" prefHeight="130.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
+      <AnchorPane layoutX="46.0" layoutY="530.0" prefHeight="117.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
          <children>
             <Text fill="#ffb800" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Revenue" wrappingWidth="204.0">
                <font>
@@ -79,7 +79,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="46.0" layoutY="704.0" prefHeight="130.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
+      <AnchorPane layoutX="46.0" layoutY="654.0" prefHeight="117.0" prefWidth="336.0" style="-fx-background-color: white; -fx-background-radius: 8px;">
          <children>
             <Text fill="#ffb800" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Completed Order " wrappingWidth="290.0">
                <font>

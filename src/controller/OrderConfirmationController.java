@@ -97,7 +97,7 @@ public class OrderConfirmationController {
                                 if (rs.getInt("paid") == 1 && rs.getString("status").equals("ready")) {
                                     // order telah dibayar
                                     cancelBtn.setVisible(false);
-                                    informationText.setText("Order Status : Order Is Ready To Served");
+                                    informationText.setText("Order Status : Order Is Ready!");
                                     informationText.setVisible(true);
                                 }
 

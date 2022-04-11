@@ -28,8 +28,9 @@ public class DashboardChefController {
     private Text leastFavoriteMenu;
 
     public void initialize() {
-
+        System.out.println("halo1");
         try {
+            System.out.println("halo2");
             Connection conn = DatabaseTools.getConnection();
             Statement statement = conn.createStatement();
 
@@ -38,8 +39,10 @@ public class DashboardChefController {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
+                System.out.println("halo3");
                 favoriteMenu.setText(rs.getString("menus.name"));
             }
+            System.out.println("halo4");
 
             DatabaseTools.closeQueryOperation(conn, statement, rs);
 
@@ -56,6 +59,7 @@ public class DashboardChefController {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
+
                 leastFavoriteMenu.setText(rs.getString("menus.name"));
             }
 
@@ -92,7 +96,7 @@ public class DashboardChefController {
         }
 
         if (this.dateStart != null && this.dateEnd != null) {
-            System.out.println("halo");
+
             try {
                 Connection conn = DatabaseTools.getConnection();
                 Statement statement = conn.createStatement();

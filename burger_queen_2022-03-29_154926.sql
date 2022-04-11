@@ -1,3 +1,7 @@
+CREATE DATABASE burger_queen;
+
+use burger_queen;
+
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: burger_queen
@@ -27,7 +31,7 @@ CREATE TABLE `ingredients` (
   `name` varchar(50) DEFAULT NULL,
   `quantity_in_grams` decimal(10,4) unsigned NOT NULL DEFAULT '0.0000',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +48,7 @@ CREATE TABLE `menus` (
   `available` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +92,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`table_number`) REFERENCES `tables` (`table_number`),
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`),
   CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`waiter_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +144,7 @@ CREATE TABLE `transactions` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +179,7 @@ CREATE TABLE `users` (
   `role` enum('waiter','chef','manager','customer') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -190,6 +194,89 @@ CREATE TABLE `users` (
 -- Dump completed on 2022-03-29 15:49:28
 
 
-INSERT INTO users (username, password, role) VALUES ('manager', '123', 'manager'), ('chef', '123', 'chef'), ('customer', '123', 'customer'), ('customer1', '123', 'customer'), ('waiter', '123', 'waiter');
+INSERT INTO users (username, password, role) VALUES ('manager', '123', 'manager'), ('chef', '123' , 'chef'),  ('waiter', '123' , 'waiter'), ('customer', '123' , 'customer'), ('customer1', '123' , 'customer'),  ('customer2', '123' , 'customer');
+
+INSERT INTO ingredients (name, quantity_in_grams) VALUES('Buns', 0), ('Lettuce' , 0), ('Mayonnaise', 0), ('Tomato', 0), ('Egg', 0), ('Ketchup', 0), ('Beef', 0), ('Chicken', 0);
+
+INSERT INTO menus(name, price, available) VALUES ('Cheese Burger', '15', 1), ('Teriyaki Burger', '15', 1), ('Chilli Burger', '15', 1), ('Double Cheese Burger', '25', 1), ('Bacon Burger', '25', 0); 
+
+INSERT INTO recipes (menu_id, ingredient_id, quantity_in_grams) VALUES (1, 1, 100), (1,2, 100), (1,3,100), (1,4,100),
+                                (2, 1, 100), (2,5, 100), (2,6,100), (2,7,100),
+                                (3, 1, 100), (3,4, 100), (3,8,100), (3,7,100),
+                                (4, 1, 100), (4,2, 100), (4,8,100), (4,3,100),
+                                (5, 1, 100), (5,4, 100), (5,8,100), (5,7,100);
+
+INSERT INTO tables(table_number, table_capacity, available) VALUES(1,2,1),(2,2,1),(3,2,1),(4,2,1),(5,2,1),(6,2,1),(7,2,1),(8,2,1),(9,2,1),(10,2,1);
+
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 1;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(1,1,10000);
+
+
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 2;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(2,2,10000);
+  
+
+
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 3;
+
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(3,3,10000);
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 4;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(4,4,10000);
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 5;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(5,5,10000);
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 6;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(6,6,10000);
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 7;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(7,7,10000);
+
+UPDATE ingredients SET quantity_in_grams = 10000 WHERE id = 8;
+
+INSERT INTO transactions (transaction_date, price, type) VALUES ('2021-04-19 15:49:28', 30, 'kredit');
+
+INSERT INTO transactions_has_ingredients(transaction_id, ingredient_id, quantity_in_grams) VALUES(8,8,10000);
+
+
+INSERT INTO orders(order_date, paid, waiter_id, customer_id, table_number, total_price, status) 
+VALUES ('2021-04-20 15:49:28', 1, 3, 4, 1, 30, 'completed');
+
+INSERT INTO menus_has_orders(menu_id, order_id, quantity) VALUES(1,1, 1), (2,1, 1);
+
+INSERT INTO transactions (transaction_date, price, order_id, type) VALUES ('2021-04-20 15:49:28', 30, 1, 'debit');
+
+
+INSERT INTO orders(order_date, paid, waiter_id, customer_id, table_number, total_price, status) 
+VALUES ('2021-04-20 15:49:28', 0, 3, 4, 1, 30, 'pending');
+
+INSERT INTO menus_has_orders(menu_id, order_id, quantity) VALUES(3,2, 1), (4,2, 1);
+
+
 
 
