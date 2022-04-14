@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,16 +19,21 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Menu;
+import model.Order;
 import tools.AlertTools;
 import tools.CurrentLoginUser;
 import tools.DatabaseTools;
 import tools.JavafxTools;
 
 public class OrderConfirmationController {
+
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private TableColumn<Menu, String> menuNameCol;
@@ -74,12 +80,25 @@ public class OrderConfirmationController {
                     @Override
                     public void run() {
                         // check apakah ordernya telah dibayar?
+                        Order.cancelOrderBiggerThanOneDay();
                         try {
                             Connection conn = DatabaseTools.getConnection();
                             Statement stmt = conn.createStatement();
                             ResultSet rs = stmt.executeQuery("SELECT * FROM orders WHERE id = " + order_id);
 
                             if (rs.next()) {
+
+                                if (rs.getString("status").equals("canceled")) {
+                                    Connection connGantiStatusTable = DatabaseTools.getConnection();
+                                    Statement stmtGantiStatusTable = connGantiStatusTable.createStatement();
+                                    stmtGantiStatusTable
+                                            .executeUpdate("UPDATE tables SET available = '1' WHERE table_number = "
+                                                    + table_num);
+
+                                    informationText.setText("Order telah dibatalkan, \nMelebihi Batas Waktu!");
+
+                                    cancelBtn.setVisible(false);
+                                }
 
                                 if (rs.getInt("paid") == 0) {
                                     doneBtn.setVisible(false);

@@ -132,7 +132,7 @@ public class Order {
             Statement queryOrders = conn.createStatement();
             ResultSet rsOrders = queryOrders
                     .executeQuery(
-                            "SELECT * FROM orders WHERE DATE(order_date) != CURRENT_DATE AND status != 'canceled' AND status = 'pending' AND paid = '0'");
+                            "SELECT * FROM orders WHERE NOW() > (order_date + INTERVAL 10 MINUTE) AND status != 'canceled' AND status = 'pending' AND paid = '0'");
             while (rsOrders.next()) {
                 Statement queryMenu = conn.createStatement();
                 ResultSet rsMenu = queryMenu
