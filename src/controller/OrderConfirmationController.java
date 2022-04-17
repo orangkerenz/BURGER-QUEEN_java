@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,8 +67,11 @@ public class OrderConfirmationController {
 
     private int table_num;
 
+    private int timerTaskRun;
+
     @FXML
     public void initialize() {
+        timerTaskRun = 0;
         menuNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("timesOrdered"));
@@ -88,7 +90,7 @@ public class OrderConfirmationController {
 
                             if (rs.next()) {
 
-                                if (rs.getString("status").equals("canceled")) {
+                                if (rs.getString("status").equals("canceled") && timerTaskRun == 0) {
                                     Connection connGantiStatusTable = DatabaseTools.getConnection();
                                     Statement stmtGantiStatusTable = connGantiStatusTable.createStatement();
                                     stmtGantiStatusTable
@@ -97,10 +99,15 @@ public class OrderConfirmationController {
 
                                     informationText.setText("Order telah dibatalkan, \nMelebihi Batas Waktu!");
 
+                                    System.out.println("saya terbaru!");
+
                                     cancelBtn.setVisible(false);
+
+                                    timerTaskRun++;
+
                                 }
 
-                                if (rs.getInt("paid") == 0) {
+                                if (rs.getInt("paid") == 0 && !rs.getString("status").equals("canceled")) {
                                     doneBtn.setVisible(false);
                                     cancelBtn.setVisible(true);
                                 }
@@ -132,7 +139,7 @@ public class OrderConfirmationController {
                             e.printStackTrace();
                         }
                     }
-                }, 0, 500);
+                }, 0, 5000);
 
     }
 

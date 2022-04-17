@@ -53,4 +53,10 @@ public class MenuManagerController {
         JavafxTools.changeSceneActionEvent(event, "../view/DashboardManagerPage.fxml");
     }
 
+    @FXML
+    void manageUserBtn(ActionEvent event) {
+        JavafxTools.changeSceneActionEvent(event, "../view/ManageUserPage.fxml");
+
+    }
+
 }
