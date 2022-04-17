@@ -2,9 +2,9 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.LinkedList;
 
 import javafx.event.ActionEvent;
@@ -57,7 +57,7 @@ public class AddNewUserController {
             stmt.setString(2, passwordTf.getText());
             stmt.setString(3, roleCb.getValue());
 
-            int affectedRows = stmt.executeUpdate();
+            stmt.executeUpdate();
 
             AlertTools.setAlert("Success!", null, "New Users Has Been Added!", AlertType.INFORMATION);
 

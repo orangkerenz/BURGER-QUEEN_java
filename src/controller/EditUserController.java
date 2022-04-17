@@ -87,7 +87,7 @@ public class EditUserController {
                     stmt2.setString(3, roleCb.getValue());
                     stmt2.setInt(4, user.getId());
 
-                    int affectedRows = stmt2.executeUpdate();
+                    stmt2.executeUpdate();
 
                     AlertTools.setAlert("Success!", null, "Users Have Been Edited", AlertType.INFORMATION);
                 }
