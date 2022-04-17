@@ -139,7 +139,7 @@ public class OrderConfirmationController {
                             e.printStackTrace();
                         }
                     }
-                }, 0, 5000);
+                }, 0, 500);
 
     }
 
