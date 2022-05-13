@@ -63,7 +63,7 @@
 
 ![Screenshot](Example.PNG)
 
-Simple Restaurant Reservation, Inventory and Order Program
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
