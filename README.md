@@ -23,9 +23,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/orangkerenz/BURGER-QUEEN_java">
-    <img src="Logo.PNG">
-  </a>
+
 
   <h3 align="center">Burger Queen Restaurant</h3>
 
