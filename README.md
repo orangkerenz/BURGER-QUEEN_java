@@ -126,7 +126,7 @@
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/orangkerenz/BURGER-QUEEN_java](https://github.com/orangkerenz/BURGER-QUEEN_java)
+Project Link: [https://github.com/ziancarlos/burger-queen-java](https://github.com/ziancarlos/burger-queen-java)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
