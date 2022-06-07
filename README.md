@@ -106,7 +106,7 @@
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/orangkerenz/BURGER-QUEEN_java
+   git clone https://github.com/ziancarlos/burger-queen-java
    ```
 2. Import MYSQL File
    ```sh
